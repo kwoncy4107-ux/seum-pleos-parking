@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-feature android:name="android.hardware.type.automotive" android:required="true" />
+
+    <!-- Gear (AAOS GEAR_SELECTION). Normal permission, no Vehicle SDK approval needed. -->
+    <uses-permission android:name="android.car.permission.CAR_POWERTRAIN" />
+    <!-- Speed 0 check at the P moment (PERF_VEHICLE_SPEED). Optional: gear alone is the fallback. -->
+    <uses-permission android:name="android.car.permission.CAR_SPEED" />
+    <!-- Pleos SDKs -->
+    <uses-permission android:name="pleos.car.permission.TTS_SERVICE" />
+    <uses-permission android:name="pleos.car.permission.STT_SERVICE" />
+    <uses-permission android:name="pleos.car.permission.NAVI_ROUTE" />
+    <uses-permission android:name="pleos.car.permission.NAVI_ROUTE_SEARCH" />
+    <uses-permission android:name="pleos.car.permission.FUSED_LOCATION" />
+    <!-- Fallback location when FusedLocation is unavailable -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- Keeps listening to the gear while the navigation app is in front -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <application
+        android:name=".SeumApp"
+        android:allowBackup="false"
+        android:icon="@drawable/ic_seum"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@android:style/Theme.DeviceDefault.NoActionBar">
+
+        <uses-library android:name="android.car" android:required="false" />
+
+        <!--
+          Distraction-optimised: while the car is not "stopped" in Pleos terms (D at 0 km/h counts as
+          driving), the screen shows only the "이 자리 확인" button and a one-line answer; the map and details
+          appear only when the system lifts the restriction (P, parking brake, Auto Hold).
+        -->
+        <activity
+            android:name=".ui.MainActivity"
+            android:exported="true"
+            android:launchMode="singleTask">
+            <meta-data android:name="distractionOptimized" android:value="true" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name=".service.GuardService"
+            android:exported="false"
+            android:foregroundServiceType="specialUse">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="Listens to gear selection so it can check the parking spot the moment the car is put in Park" />
+        </service>
+
+        <receiver
+            android:name=".service.DemoClockReceiver"
+            android:exported="true"
+            android:permission="android.permission.DUMP" />
+
+        <receiver
+            android:name=".service.BootReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+    </application>
+</manifest>

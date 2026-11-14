@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">세움</string>
+    <string name="channel_guard">주차 확인</string>
+    <string name="guard_running">기어를 P에 넣으면 이 자리를 확인해 드려요</string>
+</resources>
