@@ -33,7 +33,7 @@ HOLD = {"park": 45.5}
 CARDS = {
     "intro": ("세움", "세우기 전엔 버튼으로 묻고, 그냥 세워도 P에서 알려 드려요", "Pleos Connect 주차 보호 앱 · 에뮬레이터 실제 동작 · 실제 Pleos 음성"),
     "mid": ("모르고 그냥 세웠다면?", "기어를 P에 넣는 순간 차량이 먼저 알려 줍니다", ""),
-    "end": ("세움", "세우기 전엔 묻고, 세우면 알려 줍니다", "github.com/kwoncy4107-ux/seum-pleos-parking"),
+    "end": ("세움", "세우기 전엔 묻고, 세우면 알려 줍니다", "github.com/panorama2508/seum-pleos-parking"),
 }
 
 
