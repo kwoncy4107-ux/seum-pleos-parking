@@ -25,7 +25,7 @@ Pleos Connect(AAOS) 차량용 앱으로, 현대자동차그룹 차량용 앱 개
 | 항목 | 위치 |
 |---|---|
 | APK (release 1.0.1) | [GitHub Release v1.0.1](https://github.com/panorama2508/seum-pleos-parking/releases/tag/v1.0.1)의 `seum-1.0.1.apk` (약 126MB로 GitHub 파일 업로드 한도를 넘어 Releases에 등록) |
-| 시연 영상 (1분 21초) | [seum-demo-video.mp4](https://github.com/panorama2508/seum-pleos-parking/releases/download/v1.0.1/seum-demo-video.mp4) — 에뮬레이터 실제 동작, 실제 Pleos 음성 |
+| 시연 영상 (1분 20초) | [seum-demo-video.mp4](https://github.com/panorama2508/seum-pleos-parking/releases/download/v1.0.1/seum-demo-video.mp4) — 에뮬레이터 실제 동작, 실제 Pleos 음성 |
 
 ## 실행 방법
 
