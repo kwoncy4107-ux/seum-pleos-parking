@@ -20,6 +20,24 @@ Pleos Connect(AAOS) 차량용 앱으로, 현대자동차그룹 차량용 앱 개
 |---|---|
 | ![운전 중 화면](docs/images/check_here_driving.png) | ![근거 칸](docs/images/reason_tiles.png) |
 
+## APK · 시연 영상
+
+| 항목 | 위치 |
+|---|---|
+| APK (release 1.0.1) | [GitHub Release v1.0.1](https://github.com/panorama2508/seum-pleos-parking/releases/tag/v1.0.1)의 `seum-1.0.1.apk` (약 126MB로 GitHub 파일 업로드 한도를 넘어 Releases에 등록) |
+| 시연 영상 (1분 21초) | [seum-demo-video.mp4](https://github.com/panorama2508/seum-pleos-parking/releases/download/v1.0.1/seum-demo-video.mp4) — 에뮬레이터 실제 동작, 실제 Pleos 음성 |
+
+## 실행 방법
+
+1. 아래 [개발·실행 환경](#개발실행-환경)의 Pleos Connect 에뮬레이터를 실행합니다.
+2. APK를 설치합니다: `adb install -r seum-1.0.1.apk`
+3. 앱 목록에서 **세움**을 열고 위치·알림 권한을 허용합니다. 처음 실행할 때 내장 지도 데이터를 푸느라 몇 초 걸립니다. 한 번 열면 이후에는 앱을 열지 않아도 백그라운드에서 P 순간을 감지합니다.
+4. 차량 신호는 Virtual Console(`adb forward tcp:8088 tcp:8088` 후 브라우저에서 `http://127.0.0.1:8088`)로 바꿉니다.
+   - **이 자리 확인:** 기어 D, 속도 0(브레이크)으로 정차한 뒤 버튼을 누릅니다.
+   - **P 자동 판정:** 정차 후 기어를 P로 바꿉니다. 내비게이션이 앞에 있어도 음성으로 알려 줍니다.
+   - 위치는 `adb emu geo fix <경도> <위도>`로 옮깁니다. 앱 오른쪽 위 **시연** 버튼을 쓰면 서울 5곳을 바로 재현할 수 있습니다.
+5. 평가용 APK는 debuggable로 빌드했습니다. 에뮬레이터에서 adb로 설치한 앱은 debuggable일 때만 주행 중 표시 허용(distractionOptimized)이 적용되어, D단 정차 중 '이 자리 확인' 화면이 정상 표시됩니다.
+
 ## 개발·실행 환경
 
 | 항목 | 값 |
