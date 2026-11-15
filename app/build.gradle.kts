@@ -13,8 +13,8 @@ android {
         minSdk = 28
         // Pleos Connect Emulator 2.1.0 is API 34
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0.0"
+        versionCode = 2
+        versionName = "1.0.1"
     }
 
     useLibrary("android.car")
@@ -38,6 +38,10 @@ android {
         release {
             isMinifyEnabled = false
             signingConfig = signingConfigs.getByName("release")
+            // Evaluation build: on the emulator an adb-installed app's distractionOptimized declaration is only
+            // honoured when the app is debuggable (store installs are trusted). Without it the "이 자리 확인"
+            // screen is covered while stopped in D. Turn off for an App Market submission.
+            isDebuggable = true
         }
     }
 

@@ -128,12 +128,15 @@ fun SeumScreen(app: SeumApp) {
     LaunchedEffect(state) { tick++ }
 
     MaterialTheme(colorScheme = lightColorScheme(background = Bg, surface = Bg, primary = Ink)) {
-        if (restricted) {
-            // Driving (in Pleos terms): one big button and one line, nothing to read.
-            DrivingScreen(state, moving = (speed ?: 0f) > 0.5f) { app.guard.checkHere() }
+        val moving = (speed ?: 0f) > 0.5f
+        if (restricted && (moving || state !is GuardState.Result)) {
+            // Driving (in Pleos terms): one big button and one line, nothing to read. Once the driver has
+            // stopped and asked "이 자리 확인", the full answer is shown exactly as in P; it folds back here
+            // as soon as the wheels turn.
+            DrivingScreen(state, moving) { app.guard.checkHere() }
             return@MaterialTheme
         }
-        if (showIntro) {
+        if (showIntro && !restricted) {
             Intro { app.store.introSeen = true; showIntro = false }
             return@MaterialTheme
         }
@@ -183,7 +186,7 @@ private fun DrivingScreen(state: GuardState, moving: Boolean, onCheck: () -> Uni
             contentAlignment = Alignment.Center,
         ) { Text("이 자리 확인", color = Color.White, fontSize = 44.sp, fontWeight = FontWeight.Bold) }
         Spacer(Modifier.height(24.dp))
-        Text("자세한 내용은 P에 넣으면 볼 수 있어요", color = Muted, fontSize = 22.sp)
+        Text("멈춘 뒤 누르면 지도와 근거까지 보여 드려요", color = Muted, fontSize = 22.sp)
     }
 }
 

@@ -13,6 +13,7 @@ import ai.seum.engine.Gear
 import ai.seum.engine.Level
 import ai.seum.engine.ParkTrigger
 import ai.seum.engine.ParkingLot
+import ai.seum.engine.Speech
 import ai.seum.engine.Verdict
 import android.os.Handler
 import android.os.Looper
@@ -307,7 +308,8 @@ class Guard(
 
     fun routeTo(lot: ParkingLot) {
         val ok = navi.route(lot)
-        voice.speak(if (ok) "${lot.name}으로 안내할게요." else "내비게이션에 연결하지 못했어요. 화면의 주소를 확인해 주세요.")
+        val name = Speech.lotName(lot)
+        voice.speak(if (ok) "$name${Speech.josa(name, "으로", "로")} 안내할게요." else "내비게이션에 연결하지 못했어요. 화면의 주소를 확인해 주세요.")
         (state.value as? GuardState.Result)?.let { _state.value = it.copy(routing = lot) }
     }
 

@@ -3,6 +3,7 @@ package ai.seum.app.navi
 import ai.pleos.playground.navi.data.RouteInfo
 import ai.pleos.playground.navi.helper.NaviHelper
 import ai.seum.engine.ParkingLot
+import ai.seum.engine.Speech
 import android.content.Context
 import android.util.Log
 
@@ -41,7 +42,7 @@ class Navigator(context: Context) {
                     longitude = lot.pos.lon,
                     displayLatitude = null,
                     displayLongitude = null,
-                    poiName = lot.name,
+                    poiName = Speech.lotName(lot),
                     poiId = "",
                     poiSubId = "0",
                     address = lot.address.ifBlank { lot.name },
